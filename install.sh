@@ -28,7 +28,8 @@ do
 done
 
 #prepare the user
-sudo adduser $GWUSER -p $(openssl passwd -1 $PASSWORD1) 
+sudo useradd $GWUSER --disable-password
+echo $GWUSER:$PASSWOOD1 | sudo chpasswd 
 sudo adduser $GWUSER sudo
 
 #prepare the OS
