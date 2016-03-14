@@ -16,10 +16,10 @@ echo "Version $VERSION"
 
 echo "Enter user name in charge of the gateway [ttn]"
 read GWUSER
-if [[$GWUSER ==""]]; then $GWUSER = "ttn"; fi
+if [[ $GWUSER =="" ]]; then $GWUSER = "ttn"; fi
 $PASSWORD1 = "X"
 $PASSWORD2 = "Y"
-while  [[$PASSWORD1 != $PASSWORD2]]
+while  [[ $PASSWORD1 != $PASSWORD2 ]]
 do
  echo "Enter password: "
  read PASSWORD1
