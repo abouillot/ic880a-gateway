@@ -14,6 +14,34 @@ if [[ $1 != "" ]]; then VERSION=$1; fi
 echo "The Things Network Gateway installer"
 echo "Version $VERSION"
 
+echo "Enter user name in charge of the gateway"
+read USER
+if [[$USER ==""]]; then $USER = "ttn"; fi
+$PASSWORD1 = "X"
+$PASSWORD2 = "Y"
+while  [[$PASSWORD1 != $PASSWORD2]]
+do
+ echo "Enter password: "
+ read PASSWORD1
+ echo "Re-enter password: "
+ read PASSWORD2
+done
+
+#prepare the user
+sudo adduser ttn -p $(openssl passwd -1 $PASSWORD1) 
+sudo adduser ttn sudo
+
+#prepare the OS
+sudo apt-get install -q -y deborphan
+sudo apt-get autoremove -q -y --purge libx11-.* lxde-.* raspberrypi-artwork xkb-data omxplayer penguinspuzzle sgml-base xml-core alsa-.* cifs-.* samba-.* fonts-.* desktop-* gnome-.*sudo apt-get autoremove --purge $(deborphan)
+sudo apt-get autoremove -q -y --purge
+sudo apt-get autoclean -q -y 
+sudo apt-get update -q -y 
+sudo apt-get upgrade
+
+# change to gateway user
+su - $USER $PASSWORD1
+
 # Update the gateway installer to the correct branch
 echo "Updating installer files..."
 OLD_HEAD=$(git rev-parse HEAD)
