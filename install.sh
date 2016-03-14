@@ -28,7 +28,7 @@ do
 done
 
 #prepare the user
-sudo useradd $GWUSER --disable-password
+sudo useradd $GWUSER
 echo $GWUSER:$PASSWOOD1 | sudo chpasswd 
 sudo adduser $GWUSER sudo
 
