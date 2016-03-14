@@ -29,7 +29,7 @@ done
 
 #prepare the user
 sudo useradd $GWUSER
-echo $GWUSER:$PASSWOOD1 | sudo chpasswd 
+echo $GWUSER:$PASSWORD1 | sudo chpasswd 
 sudo adduser $GWUSER sudo
 
 #prepare the OS
