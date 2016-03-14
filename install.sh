@@ -33,21 +33,20 @@ echo $GWUSER:$PASSWORD1 | sudo chpasswd
 sudo adduser $GWUSER sudo
 
 #prepare the OS
-sudo apt-get install -y deborphan
-sudo apt-get update -y
+#sudo apt-get install -y deborphan
+#sudo apt-get update -y
 #assume Jessie Lite has been installes
-#sudo apt-get purge xserver* ^x11 ^libx ^lx wolfram-engine -y
-#sudo apt-get autoremove -q -y --purge raspberrypi-artwork xkb-data omxplayer penguinspuzzle sgml-base xml-core alsa-.* fonts-.* desktop-* gnome-.* cifs-.* samba-.* 
-#sudo apt-get purge samba* -y
-sudo apt-get autoremove -y
-sudo apt-get upgrade -y
-sudo apt-get clean
-sudo apt-get autoremove -y --purge
-sudo apt-get autoremove --purge $(deborphan)
-sudo apt-get autoclean -y 
-sudo apt-get update -y 
-sudo apt-get upgrade -y
-
+##sudo apt-get purge xserver* ^x11 ^libx ^lx wolfram-engine -y
+##sudo apt-get autoremove -q -y --purge raspberrypi-artwork xkb-data omxplayer penguinspuzzle sgml-base xml-core alsa-.* fonts-.* desktop-* gnome-.* cifs-.* samba-.* 
+###sudo apt-get purge samba* -y
+#sudo apt-get autoremove -y
+#sudo apt-get upgrade -y
+#sudo apt-get clean
+#sudo apt-get autoremove -y --purge
+#sudo apt-get autoremove --purge $(deborphan)
+#sudo apt-get autoclean -y 
+#sudo apt-get update -y 
+#sudo apt-get upgrade -y
 
 # change to gateway user
 su - $GWUSER $PASSWORD1
