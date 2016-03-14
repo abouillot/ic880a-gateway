@@ -17,8 +17,8 @@ echo "Version $VERSION"
 echo "Enter user name in charge of the gateway [ttn]"
 read GWUSER
 if [[ $GWUSER == "" ]]; then GWUSER="ttn"; fi
-PASSWORD1 = "X"
-PASSWORD2 = "Y"
+PASSWORD1="X"
+PASSWORD2="Y"
 while  [[ $PASSWORD1 != $PASSWORD2 ]]
 do
  echo "Enter password: "
@@ -26,8 +26,6 @@ do
  echo "Re-enter password: "
  read PASSWORD2
 done
-
-exit 0
 
 #prepare the user
 sudo adduser $GWUSER -p $(openssl passwd -1 $PASSWORD1) 
