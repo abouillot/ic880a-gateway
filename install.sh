@@ -28,9 +28,9 @@ do
 done
 
 #prepare the user
-sudo useradd $GWUSER
+sudo useradd $GWUSER --create-home --groups sudo
 echo $GWUSER:$PASSWORD1 | sudo chpasswd 
-sudo adduser $GWUSER sudo
+##sudo adduser $GWUSER sudo
 
 #prepare the OS
 #sudo apt-get install -y deborphan
@@ -99,7 +99,7 @@ fi
 
 # Check dependencies
 echo "Installing dependencies..."
-apt-get install swig python-dev
+apt-get install -y swig python-dev
 
 # Install LoRaWAN packet forwarder repositories
 INSTALL_DIR="/opt/ttn-gateway"
