@@ -51,6 +51,12 @@ echo $GWUSER:$PASSWORD1 | sudo chpasswd
 # change to gateway user
 su - $GWUSER $PASSWORD1
 
+id
+
+echo $PASSWORD1 | exec sudo -s -u ttn /bin/sh - << eof
+
+id
+
 # Update the gateway installer to the correct branch
 echo "Updating installer files..."
 OLD_HEAD=$(git rev-parse HEAD)
@@ -173,3 +179,5 @@ systemctl enable ttn-gateway.service
 echo "The system will reboot in 5 seconds..."
 sleep 5
 shutdown -r now
+
+eof
