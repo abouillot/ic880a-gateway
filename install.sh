@@ -44,7 +44,7 @@ if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` == "" ]]; then
     exit 1
 fi
 
-GATEWAY_EUI="FFFE"$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3$4$5$6}')
+GATEWAY_EUI=$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3"FFFE"$4$5$6}')
 GATEWAY_EUI=${GATEWAY_EUI^^} # toupper
 
 echo "Detected EUI $GATEWAY_EUI from $GATEWAY_EUI_NIC"
@@ -102,7 +102,7 @@ if [ -d wiringPi ]; then
     ./build uninstall
     popd
     rm -rf wiringPi
-fi
+fi 
 
 # Build LoRa gateway app
 if [ ! -d lora_gateway ]; then
@@ -133,10 +133,6 @@ fi
 make
 
 popd
-
-# Install dependencies
-echo "Installing dependencies..."
-apt-get install wiringpi
 
 # Symlink poly packet forwarder
 if [ ! -d bin ]; then mkdir bin; fi
