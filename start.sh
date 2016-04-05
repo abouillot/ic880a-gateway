@@ -1,16 +1,13 @@
 #! /bin/bash
 
 # Reset iC880a PIN
-SX1301_RESET_BCM_PIN=25
-echo "$SX1301_RESET_BCM_PIN"  > /sys/class/gpio/export 
-echo "out" > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/direction 
-echo "0"   > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/value 
-sleep 0.1  
-echo "1"   > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/value 
-sleep 0.1  
-echo "0"   > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/value
+gpio -1 mode 22 out
+gpio -1 write 22 0
 sleep 0.1
-echo "$SX1301_RESET_BCM_PIN"  > /sys/class/gpio/unexport 
+gpio -1 write 22 1
+sleep 0.1
+gpio -1 write 22 0
+sleep 0.1
 
 # Test the connection, wait if needed.
 while [[ $(ping -c1 google.com 2>&1 | grep " 0% packet loss") == "" ]]; do
@@ -39,7 +36,7 @@ if [ -d ../gateway-remote-config ]; then
         exit 1
     fi
 
-    GATEWAY_EUI=$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3"FFFE"$4$5$6}')
+    GATEWAY_EUI="FFFE"$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3$4$5$6}')
     GATEWAY_EUI=${GATEWAY_EUI^^} # toupper
 
     echo "[TTN Gateway]: Use Gateway EUI $GATEWAY_EUI based on $GATEWAY_EUI_NIC"
